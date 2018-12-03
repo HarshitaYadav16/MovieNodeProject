@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const MovieSchema = new mongoose.Schema({
-	username: String,
+    username: String,
     movie: String,
     actors: [String],
     director: String,
     producer: String,
-	released_date: Date,
-	budget: Number
+    released_date: Date,
+    budget: Number
 });
 
 

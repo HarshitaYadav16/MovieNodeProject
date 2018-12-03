@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Movie List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="main">
+
+        Search:
+        <input name="searchvalue" id="searchvalue" type="search" name="searchvalue" value="">
+        <br>
+        <input id="searchbutton" type="submit">
+
+        <h3>Movie List</h3>
+        <div id="movielist"></div>
+        <a type='button' href='/logout'>Logout</a >
+		</div>
+   </body>
+   <script>
+$(document).ready(() => {
+        $("#searchbutton").click(() => {
+			let searchdata = document.getElementById("searchvalue").value;
+			$.post("http://localhost:3000/getMovie",
+			{
+				searchvalue: searchdata
+			},
+			(data, status) => {
+				console.log("Data: " + JSON.stringify(data)+ "\nStatus: " + status);
+				var movieListHtml="";
+				for(var i=0;i<data.length;i++)
+				{
+				movieListHtml += "<h2>"+data[i].movie+"</h2>"+
+						"<p>"+data[i].actors+"</p>"+
+						"<p>"+data[i].director+"</p>"+
+						"<p>"+data[i].producer+"</p>"+
+						"<p>"+data[i].released_date+"</p>"+
+						"<p>"+data[i].budget+"</p>"
+				}
+				 $("#movielist").html(movieListHtml);
+			});
+
+		});
+
+    });
+
+</script>
+</html>
