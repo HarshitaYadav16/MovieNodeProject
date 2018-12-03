@@ -1,5 +1,15 @@
 [
   {
+    "type": "get",
+    "url": "/homepage",
+    "title": "redirects to homepage of application",
+    "name": "homepage",
+    "version": "0.0.0",
+    "filename": "routes/router.js",
+    "group": "C__files_movie_routes_router_js",
+    "groupTitle": "C__files_movie_routes_router_js"
+  },
+  {
     "type": "post",
     "url": "/addmovie/",
     "title": "Add movie",
@@ -83,9 +93,44 @@
     "groupTitle": "Movie"
   },
   {
+    "type": "get",
+    "url": "/getAllMovies",
+    "title": "Get movie information according to the user",
+    "name": "getAllMovies",
+    "group": "Movie",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "get",
+            "description": "<p>movie movie name</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Sends",
+            "description": "<p>error</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/router.js",
+    "groupTitle": "Movie"
+  },
+  {
     "type": "post",
     "url": "/getMovie",
-    "title": "Provides movie information",
+    "title": "get movie information",
     "name": "getMovie",
     "group": "Movie",
     "success": {
@@ -95,7 +140,7 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "provides",
+            "field": "get",
             "description": "<p>movie movie name</p>"
           }
         ]

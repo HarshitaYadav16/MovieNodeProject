@@ -23,6 +23,25 @@
    </body>
    <script>
 $(document).ready(() => {
+		
+		$.ajax({url: "http://localhost:3000/getAllMovies", success: function(result){
+                console.log(result);
+				var movieListHtml="";
+				for(var i=0;i<result.length;i++)
+				{
+				movieListHtml += "<h4>"+result[i].movie+"</h4>"+
+						"<p>"+result[i].actors+"</p>"+
+						"<p>"+result[i].director+"</p>"+
+						"<p>"+result[i].producer+"</p>"+
+						"<p>"+result[i].released_date+"</p>"+
+						"<p>"+result[i].budget+"</p>"
+				}
+				 $("#movielist").html(movieListHtml);
+                
+            }});
+		
+		
+		
         $("#searchbutton").click(() => {
 			let searchdata = document.getElementById("searchvalue").value;
 			$.post("http://localhost:3000/getMovie",

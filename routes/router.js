@@ -112,23 +112,59 @@ router.post('/addmovie', ensureToken, (req, res, next) => {
     }
 })
 
+
+//GET route to get movie details
+/** 
+ * @api {get} /homepage redirects to homepage of application
+ * @apiName homepage
+ */
 router.get('/homepage', (req, res, next) => {
     return res.sendFile(path.join(__dirname + '/../views/homepage.html'));
 });
 
 
 
+//GET route to get movie details
+/** 
+ * @api {get} /getAllMovies Get movie information according to the user
+ * @apiName getAllMovies
+ * @apiGroup Movie
+ * @apiSuccess {String} get movie movie name
+ * @apiSuccess {String} get actors All actors of the movie
+ * @apiSuccess {String} get director director of the movie
+ * @apiSuccess {String} get producer producer of the movie
+ * @apiSuccess {Date} get released_date released date of the movie
+ * @apiSuccess {Number} get budget budget of the movie
+ * @apiError Sends error
+ */
+router.get('/getAllMovies', (req, res, next) => {
+	if (req.session.username == "admin") {
+            Movie.find((err, data) => {
+                if (err) res.send(err);
+                else return res.send(data);
+            });
+        } else {
+            Movie.find({
+                    username: req.session.username
+            }, (err, data) => {
+                if (err) res.send(err);
+                else return res.send(data);
+            });
+
+        }
+});
+
 //POST route to get movie details
 /** 
- * @api {post} /getMovie Provides movie information
+ * @api {post} /getMovie get movie information
  * @apiName getMovie
  * @apiGroup Movie
- * @apiSuccess {String} provides movie movie name
- * @apiSuccess {String} provides actors All actors of the movie
- * @apiSuccess {String} provides director director of the movie
- * @apiSuccess {String} provides producer producer of the movie
- * @apiSuccess {Date} provides released_date released date of the movie
- * @apiSuccess {Number} provides budget budget of the movie
+ * @apiSuccess {String} get movie movie name
+ * @apiSuccess {String} get actors All actors of the movie
+ * @apiSuccess {String} get director director of the movie
+ * @apiSuccess {String} get producer producer of the movie
+ * @apiSuccess {Date} get released_date released date of the movie
+ * @apiSuccess {Number} get budget budget of the movie
  * @apiError Sends error
  */
 router.post('/getMovie', (req, res, next) => {
